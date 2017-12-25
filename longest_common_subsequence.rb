@@ -44,19 +44,45 @@ def lcs_dynamic(a1, a2)
   n1 = a1.length
   n2 = a2.length
 
-  if a1[0] == a2[0]
-    lcs_dynamic(a1[1..-1], a2[1..-1])
-  else
-    lcs_dynamic(a1, a2[1..-1])
+  m = Array.new(n1+1) { Array.new(n2+1)}
+
+  for i in 0..n1 do
+    m[i][0] = 0
   end
+
+  for i in 0..n2 do
+    m[0][i] = 0
+  end
+
+  i = 1
+  j = 1
+
+  while i <= n1 do
+    while j <= n2 do
+      puts "i: #{i}, j: #{j}"
+      puts "a1[#{i-1}]: #{a1[i-1]}, a2[#{j-1}]: #{a2[j-1]}"
+      if a1[i-1] == a2[j-1]
+        puts a1[i-1]
+        m[i][j] = 1 + m[i-1][j-1]
+      else
+        m[i][j] = [m[i][j-1], m[i-1][j]].max
+      end
+      j += 1
+    end
+    i += 1
+    j = 1
+  end
+
+  p m
+  return m[n1][n2]
 end
 
-a1 = %w(g a b d e f g)
-a2 = %w(c a d f g)
+a1 = %w(g a b d e g)
+a2 = %w(c a e d g)
+puts "lcs: #{lcs_dynamic(a1, a2)}"
 
-
-sub = %w(a b d c )
-a = %(d a b b d c)
-puts is_lcs(sub, a)
-
-all_subsequences a
+# sub = %w(a b d c )
+# a = %(d a b b d c)
+# puts is_lcs(sub, a)
+#
+# all_subsequences a
