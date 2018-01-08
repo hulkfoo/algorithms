@@ -29,8 +29,20 @@ def is_lcs(a1, a2)
   r
 end
 
-def all_subsequences(a)
-
+def all_subsequences(s)
+  n = s.size
+  i = 0
+  count = 0
+  while i<n
+    j = i
+    while j<n
+      puts s[i..j]
+      count +=1
+      j += 1
+    end
+    i += 1
+  end
+  puts "count is #{count}"
 end
 
 def lcs_rough_all(a1, a2)
@@ -79,10 +91,10 @@ end
 
 a1 = %w(g a b d e g)
 a2 = %w(c a e d g)
-puts "lcs: #{lcs_dynamic(a1, a2)}"
+# puts "lcs: #{lcs_dynamic(a1, a2)}"
 
 # sub = %w(a b d c )
-# a = %(d a b b d c)
+a = %(d a b b d c)
 # puts is_lcs(sub, a)
 #
-# all_subsequences a
+all_subsequences "abcde6"
