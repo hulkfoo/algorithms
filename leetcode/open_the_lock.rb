@@ -41,7 +41,11 @@
 # @param {String} target
 # @return {Integer}
 def open_lock(deadends, target)
-    seen = ['0000']
+    # 这里要使用 set，如何用 Array 的话，判断一个元素是否在是 O(n) 的事件，如果 deadends.size 过大，再乘以 10000 就更大了
+    require 'set'
+    deadends = deadends.to_set
+    seen = Set.new
+    seen << '0000'
     q = [['0000', 0]]
 
     while not q.empty?
